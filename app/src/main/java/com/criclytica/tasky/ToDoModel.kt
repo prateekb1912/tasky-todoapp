@@ -10,7 +10,7 @@ data class ToDoModel(
     var category: String,
     var date: Long,
     var time: Long,
-    var isDone: Boolean = false,
+    var isDone: Int = -1,
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 )
