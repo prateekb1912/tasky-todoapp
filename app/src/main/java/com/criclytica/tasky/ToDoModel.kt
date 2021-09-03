@@ -11,7 +11,7 @@ data class ToDoModel(
     var date: Long,
     var time: Long,
     var isDone: Boolean = false,
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     var id: Long = 0
-
 )
+
