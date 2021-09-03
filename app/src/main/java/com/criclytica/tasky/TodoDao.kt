@@ -17,10 +17,10 @@ interface TodoDao {
     fun getTasks(): LiveData<List<ToDoModel>>
 
     // To mark a selected task as finished
-    @Query("Update ToDoModel Set isDone = 1 Where id=uid")
+    @Query("Update ToDoModel Set isDone = 1 Where id=:uid")
     fun finishTask(uid:Long)
 
     // To delete any selected task
-    @Query("Delete From ToDoModel Where id=uid")
+    @Query("Delete From ToDoModel Where id=:uid")
     fun deleteTask(uid: Long)
 }
