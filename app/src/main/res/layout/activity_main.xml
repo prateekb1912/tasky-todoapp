@@ -16,6 +16,7 @@
         android:id="@+id/todoRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
