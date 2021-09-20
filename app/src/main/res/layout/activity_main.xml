@@ -8,6 +8,9 @@
     
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
+        app:title="Tasky"
+        app:titleTextColor="@color/white"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -21,6 +24,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="32dp"
+        android:tint="@color/white"
+        android:src="@drawable/ic_baseline_add_circle_24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
