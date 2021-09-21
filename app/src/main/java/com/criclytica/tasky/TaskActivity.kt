@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.DatePicker
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_task.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 const val DB_NAME = "todo.db"
@@ -44,8 +45,27 @@ class TaskActivity : AppCompatActivity() {
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
             calendar.set(Calendar.DAY_OF_MONTH, day)
+
+            updateDate()
         }
 
-        val datePickerDialog
+        val datePickerDialog = DatePickerDialog(
+            this,
+            dateSetListener,
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis()
+        datePickerDialog.show()
+    }
+
+    private fun updateDate() {
+        val format = "EEE, d MMM yyyy"
+        val sdf = SimpleDateFormat(format)
+        dateEdt.setText(sdf.format(calendar.time))
+
+        timeInpLay.visibility = View.VISIBLE
     }
 }
