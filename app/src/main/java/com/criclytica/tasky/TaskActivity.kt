@@ -1,10 +1,12 @@
 package com.criclytica.tasky
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.DatePicker
+import android.widget.TimePicker
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_task.*
 import java.text.SimpleDateFormat
@@ -14,7 +16,9 @@ const val DB_NAME = "todo.db"
 class TaskActivity : AppCompatActivity() {
 
     lateinit var calendar: Calendar
-    lateinit var dateSetListener:DatePickerDialog.OnDateSetListener
+
+    lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
+    lateinit var timeSetListener: TimePickerDialog.OnTimeSetListener
 
     val db by lazy {
         Room.databaseBuilder(
@@ -36,12 +40,44 @@ class TaskActivity : AppCompatActivity() {
             R.id.dateEdt -> {
                 setListener()
             }
+
+            R.id.timeEdt -> {
+                setTimeListener()
+            }
         }
+    }
+
+    private fun setTimeListener() {
+        calendar = Calendar.getInstance()
+
+        timeSetListener = TimePickerDialog.OnTimeSetListener(){ _: TimePicker, hour: Int, min: Int ->
+            calendar.set(Calendar.HOUR_OF_DAY, hour)
+            calendar.set(Calendar.MINUTE, min)
+
+            updateTime()
+        }
+
+        val timePickerDialog = TimePickerDialog(
+                this,
+                timeSetListener,
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                false
+        )
+
+        timePickerDialog.show()
+    }
+
+    private fun updateTime() {
+        val format = "h:mm a"
+
+        val sdf = SimpleDateFormat(format)
+        dateEdt.setText(sdf.format(calendar.time))
     }
 
     private fun setListener() {
         calendar = Calendar.getInstance()
-        dateSetListener = DatePickerDialog.OnDateSetListener{ datePicker: DatePicker, year: Int, month: Int, day: Int ->
+        dateSetListener = DatePickerDialog.OnDateSetListener{ _: DatePicker, year: Int, month: Int, day: Int ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
             calendar.set(Calendar.DAY_OF_MONTH, day)
