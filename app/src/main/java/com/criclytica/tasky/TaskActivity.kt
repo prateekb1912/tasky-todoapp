@@ -5,6 +5,7 @@ import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.room.Room
@@ -13,12 +14,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 const val DB_NAME = "todo.db"
-class TaskActivity : AppCompatActivity() {
+class TaskActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var calendar: Calendar
 
     lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
     lateinit var timeSetListener: TimePickerDialog.OnTimeSetListener
+
+    private val labels = arrayListOf("Personal", "Business", "Insurance", "Shopping", "Banking")
 
     val db by lazy {
         Room.databaseBuilder(
@@ -33,6 +36,17 @@ class TaskActivity : AppCompatActivity() {
         setContentView(R.layout.activity_task)
 
         dateEdt.setOnClickListener(this)
+        timeEdt.setOnClickListener(this)
+
+        setUpSpinner()
+    }
+
+    private fun setUpSpinner() {
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, labels)
+
+        labels.sort()
+
+        spinCateg.adapter = adapter
     }
 
     override fun onClick(v: View) {
