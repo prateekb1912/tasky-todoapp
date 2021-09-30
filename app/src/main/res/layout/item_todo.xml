@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/txtTime"
-                tools:text="22-09-2020"
+                tools:text="10:09 AM"
                 android:textColor="#000"
                 android:visibility="visible"/>
 
