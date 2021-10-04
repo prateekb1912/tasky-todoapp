@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<array name="ingr_color_arr">
+<array name="color_arr">
     <item>@color/ingr_red1</item>
     <item>@color/ingr_orange1</item>
     <item>@color/ingr_yellow1</item>
